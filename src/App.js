@@ -1,23 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Deso from "deso-protocol";
+const deso = new Deso();
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <button
+        onClick={() => {
+          deso.identity.login();
+        }}
+      >
+        login
+      </button>
+      <button
+        onClick={() => {
+          deso.identity.logout(deso.identity.getUserKey());
+        }}
+      >
+        logout
+      </button>
+      <button
+        onClick={async () => {
+          const user = await deso.user.getSingleProfile({
+            PublicKeyBase58Check: deso.identity.getUserKey(),
+          });
+          console.log(user);
+        }}
+      >
+        get user
+      </button>
     </div>
   );
 }
