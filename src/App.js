@@ -37,6 +37,22 @@ function App() {
       </button>
       <button
         onClick={async () => {
+          const request = {
+            UpdaterPublicKeyBase58Check: deso.identity.getUserKey(),
+            BodyObj: {
+              Body: "My first post on DESO",
+              VideoURLs: [],
+              ImageURLs: [],
+            },
+          };
+          const response = await deso.posts.submitPost(request);
+        }}
+      >
+        {" "}
+        submit post
+      </button>
+      <button
+        onClick={async () => {
           const postResponse = await deso.posts.submitPost({
             UpdaterPublicKeyBase58Check: deso.identity.getUserKey(),
             BodyObj: {
